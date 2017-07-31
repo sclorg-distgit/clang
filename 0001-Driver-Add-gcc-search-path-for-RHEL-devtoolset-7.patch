@@ -1,0 +1,24 @@
+From 7a8a99cfaabf0e46367db4e5189e475255a55d20 Mon Sep 17 00:00:00 2001
+From: Tom Stellard <tstellar@redhat.com>
+Date: Thu, 15 Jun 2017 20:09:23 +0000
+Subject: [PATCH] Driver:  Add gcc search path for RHEL devtoolset-7
+
+---
+ lib/Driver/ToolChains.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/lib/Driver/ToolChains.cpp b/lib/Driver/ToolChains.cpp
+index 5ddc32b..3113b88 100644
+--- a/lib/Driver/ToolChains.cpp
++++ b/lib/Driver/ToolChains.cpp
+@@ -1442,6 +1442,7 @@ void Generic_GCC::GCCInstallationDetector::init(
+     // Then look for distribution supplied gcc installations.
+     if (D.SysRoot.empty()) {
+       // Look for RHEL devtoolsets.
++      Prefixes.push_back("/opt/rh/devtoolset-7/root/usr");
+       Prefixes.push_back("/opt/rh/devtoolset-6/root/usr");
+       Prefixes.push_back("/opt/rh/devtoolset-4/root/usr");
+       Prefixes.push_back("/opt/rh/devtoolset-3/root/usr");
+-- 
+2.9.3
+

@@ -1,0 +1,37 @@
+From a78bb8f83121ebec14b4b79512b438049706e727 Mon Sep 17 00:00:00 2001
+From: Tom Stellard <tstellar@redhat.com>
+Date: Tue, 28 Feb 2017 16:46:19 +0000
+Subject: [PATCH] Driver: Update devtoolset usage for RHEL
+
+- remove path to dts-1.x (corresponds to gcc 4.7)
+- add path to dts-6 (corresponds to 6.x)
+
+Patch By: Maria Gottschalk
+
+Differential Revision: https://reviews.llvm.org/D29855
+
+git-svn-id: https://llvm.org/svn/llvm-project/cfe/trunk@296485 91177308-0d34-0410-b5e6-96231b3b80d8
+---
+ lib/Driver/ToolChains.cpp | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/lib/Driver/ToolChains.cpp b/lib/Driver/ToolChains.cpp
+index 9bc9ae4..5ddc32b 100644
+--- a/lib/Driver/ToolChains.cpp
++++ b/lib/Driver/ToolChains.cpp
+@@ -1442,11 +1442,10 @@ void Generic_GCC::GCCInstallationDetector::init(
+     // Then look for distribution supplied gcc installations.
+     if (D.SysRoot.empty()) {
+       // Look for RHEL devtoolsets.
++      Prefixes.push_back("/opt/rh/devtoolset-6/root/usr");
+       Prefixes.push_back("/opt/rh/devtoolset-4/root/usr");
+       Prefixes.push_back("/opt/rh/devtoolset-3/root/usr");
+       Prefixes.push_back("/opt/rh/devtoolset-2/root/usr");
+-      Prefixes.push_back("/opt/rh/devtoolset-1.1/root/usr");
+-      Prefixes.push_back("/opt/rh/devtoolset-1.0/root/usr");
+       // And finally in /usr.
+       Prefixes.push_back("/usr");
+     }
+-- 
+1.8.3.1
+
